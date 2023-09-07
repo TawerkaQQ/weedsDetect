@@ -1,2 +1,0 @@
-# weedsDetect
-ambrosia+else
