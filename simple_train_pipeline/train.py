@@ -18,7 +18,7 @@ def load_model(model_name: str, num_classes: int, pretrained: bool = False):
         'resnet34': torchvision.models.resnet34,
         'resnet50': torchvision.models.resnet50,
         'resnet101': torchvision.models.resnet101,
-        'resnet162': torchvision.models.resnet152,
+        'resnet152': torchvision.models.resnet152,
     }
     if pretrained:
         model = models[model_name](weights='IMAGENET1K_V1')
