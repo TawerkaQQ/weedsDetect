@@ -58,8 +58,6 @@ def parse_args() -> argparse.Namespace:
 
     return parser.parse_args()
 
-
-
 def train_loop(
         model,
         start_epoch,
