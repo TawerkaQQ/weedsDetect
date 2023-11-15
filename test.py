@@ -13,18 +13,13 @@ from torchvision.models import resnet18
 
 def test_models(latest_model, best_model, test_loader):
 
-    latest_model.load_state_dict(torch.load(latest_model['model_state_dict']))
     latest_model.eval()
-
-    best_model.load_state_dict(torch.load(best_model['model_state_dict']))
     best_model.eval()
     
     acc_latest_model = 0
     acc_best_model = 0
     all_photo = len(test_loader.dataset)
 
-    # Test
-    
     with torch.no_grad():
         for inputs, labels in test_loader:
             outputs_latest_model = latest_model(inputs)
@@ -55,10 +50,13 @@ test_dataset = datasets.ImageFolder("/home/cyber/Downloads/PlantNet-300K/testFor
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=168, shuffle=False, num_workers=0)
 test_loader.dataset.transform = train_transforms
 
-latest_model = resnet18()
-best_model = resnet18()
+latest_model = resnet18(num_classes=2)
+best_model = resnet18(num_classes=2)
 
-latest_model = torch.load('/home/cyber/Desktop/project_AmbrosiaSystem/checkpoints/latest_model.pt')
-best_model = torch.load('/home/cyber/Desktop/project_AmbrosiaSystem/checkpoints/best_model.pt')
+checkpoint_best_model = torch.load('/home/cyber/Desktop/weedsDetect/checkpoints/best_model.pt')
+best_model.load_state_dict(checkpoint_best_model['model_state_dict'])
+
+checkpoint_latest_model = torch.load('/home/cyber/Desktop/weedsDetect/checkpoints/latest_model.pt')
+latest_model.load_state_dict(checkpoint_latest_model['model_state_dict'])
 
 test_models(latest_model, best_model, test_loader)
