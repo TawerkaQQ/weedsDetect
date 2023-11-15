@@ -23,6 +23,8 @@ def test_models(latest_model, best_model, test_loader):
     acc_best_model = 0
     all_photo = len(test_loader.dataset)
 
+    # Test
+    
     with torch.no_grad():
         for inputs, labels in test_loader:
             outputs_latest_model = latest_model(inputs)
